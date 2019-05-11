@@ -6,6 +6,9 @@ class Carousel {
 
     this.images = element.querySelectorAll("img");
   }
+
+  leftClick() {}
+  rightClick() {}
 }
 
 let carousel = document.querySelector(".carousel");
