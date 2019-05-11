@@ -8,37 +8,63 @@ class Carousel {
 
     this.selectedImage = 0;
 
-    this.selectImage();
+    this.selectImage("left", 0, 3);
 
     this.leftBtn.addEventListener("click", () => this.leftClick());
     this.rightBtn.addEventListener("click", () => this.rightClick());
   }
 
   leftClick() {
-    if (this.selectedImage === 0) {
+    let oldImage = this.selectedImage;
+
+    if (oldImage === 0) {
       this.selectedImage = this.images.length - 1;
     } else {
       this.selectedImage -= 1;
     }
 
-    this.selectImage();
+    this.selectImage("left", this.selectedImage, oldImage);
   }
   rightClick() {
-    if (this.selectedImage === this.images.length - 1) {
+    let oldImage = this.selectedImage;
+
+    if (oldImage === this.images.length - 1) {
       this.selectedImage = 0;
     } else {
       this.selectedImage += 1;
     }
-    this.selectImage();
+    this.selectImage("right", this.selectedImage, oldImage);
   }
-  selectImage() {
-    this.images.forEach((img, i) => {
-      if (i === this.selectedImage) {
-        img.style.display = "block";
-      } else {
-        img.style.display = "none";
-      }
-    });
+
+  selectImage(direction, newIndex, oldIndex) {
+    let newImage = this.images[newIndex];
+    let oldImage = this.images[oldIndex];
+
+    let oldImageTransition;
+    let newImageTransition;
+
+    if (direction === "left") {
+      oldImageTransition = 100;
+      newImageTransition = -100;
+    } else {
+      oldImageTransition = -100;
+      newImageTransition = 100;
+    }
+
+    oldImage.style.transform = `translate3d(${oldImageTransition}%, 0, 0)`;
+    oldImage.style.opacity = 0;
+    newImage.style.opacity = 0;
+
+    setTimeout(() => {
+      oldImage.style.display = "none";
+      newImage.style.display = "block";
+      newImage.style.transform = `translate3d(${newImageTransition}%, 0, 0)`;
+    }, 500);
+
+    setTimeout(() => {
+      newImage.style.opacity = 1;
+      newImage.style.transform = "";
+    }, 600);
   }
 }
 
