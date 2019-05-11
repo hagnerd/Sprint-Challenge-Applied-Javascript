@@ -23,7 +23,14 @@ class Carousel {
 
     this.selectImage();
   }
-  rightClick() {}
+  rightClick() {
+    if (this.selectedImage === this.images.length - 1) {
+      this.selectedImage = 0;
+    } else {
+      this.selectedImage += 1;
+    }
+    this.selectImage();
+  }
   selectImage() {
     this.images.forEach((img, i) => {
       if (i === this.selectedImage) {
