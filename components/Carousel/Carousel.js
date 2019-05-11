@@ -1,6 +1,5 @@
 class Carousel {
   constructor(element) {
-    console.log("ya");
     this.element = element;
     this.leftBtn = element.querySelector(".left-button");
     this.rightBtn = element.querySelector(".right-button");
@@ -9,16 +8,30 @@ class Carousel {
 
     this.selectedImage = 0;
 
-    this.selectImage(this.selectedImage);
+    this.selectImage();
 
     this.leftBtn.addEventListener("click", () => this.leftClick());
     this.rightBtn.addEventListener("click", () => this.rightClick());
   }
 
-  leftClick() {}
+  leftClick() {
+    if (this.selectedImage === 0) {
+      this.selectedImage = this.images.length - 1;
+    } else {
+      this.selectedImage -= 1;
+    }
+
+    this.selectImage();
+  }
   rightClick() {}
-  selectImage(index) {
-    Array.from(this.images).find((_, i) => i === index).style.display = "block";
+  selectImage() {
+    this.images.forEach((img, i) => {
+      if (i === this.selectedImage) {
+        img.style.display = "block";
+      } else {
+        img.style.display = "none";
+      }
+    });
   }
 }
 
