@@ -1,12 +1,15 @@
 class Carousel {
   constructor(element) {
+    console.log("ya");
     this.element = element;
     this.leftBtn = element.querySelector(".left-button");
     this.rightBtn = element.querySelector(".right-button");
 
     this.images = element.querySelectorAll("img");
 
-    this.selectedImage = this.images[0];
+    this.selectedImage = 0;
+
+    this.selectImage(this.selectedImage);
 
     this.leftBtn.addEventListener("click", () => this.leftClick());
     this.rightBtn.addEventListener("click", () => this.rightClick());
@@ -14,6 +17,9 @@ class Carousel {
 
   leftClick() {}
   rightClick() {}
+  selectImage(index) {
+    Array.from(this.images).find((_, i) => i === index).style.display = "block";
+  }
 }
 
 let carousel = document.querySelector(".carousel");
