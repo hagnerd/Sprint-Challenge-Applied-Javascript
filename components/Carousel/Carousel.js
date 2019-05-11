@@ -5,6 +5,9 @@ class Carousel {
     this.rightBtn = element.querySelector(".right-button");
 
     this.images = element.querySelectorAll("img");
+
+    this.leftBtn.addEventListener("click", () => this.leftClick());
+    this.rightBtn.addEventListener("click", () => this.rightClick());
   }
 
   leftClick() {}
